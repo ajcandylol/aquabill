@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -5,10 +6,10 @@ import { ConsumptionForm } from "@/components/dashboard/consumption-form";
 import { BillSummary } from "@/components/dashboard/bill-summary";
 import { useSettings } from "@/contexts/settings-context";
 import { useToast } from "@/hooks/use-toast";
-import { useRouter }_next_dynamic_client_module_chunks from "next/navigation";
+import { useRouter } from "next/navigation";
 import { format } from 'date-fns';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface CalculatedBill {
   consumption: number;
@@ -29,6 +30,8 @@ export default function LogConsumptionPage() {
 
   const handleConsumptionSubmit = (data: { consumption: number; period: string }) => {
     setCalculatedBill(data);
+    // Store the latest bill data in localStorage so it can be picked up by /billing page
+    localStorage.setItem("latestAquaBill", JSON.stringify(data));
     toast({
       title: "Consumption Logged",
       description: `Bill for ${data.period} calculated. Consumption: ${data.consumption} units.`,
