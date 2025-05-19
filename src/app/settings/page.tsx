@@ -1,0 +1,9 @@
+import { RateSettingsForm } from "@/components/settings/rate-settings-form";
+
+export default function SettingsPage() {
+  return (
+    <div className="container mx-auto py-8">
+      <RateSettingsForm />
+    </div>
+  );
+}
