@@ -10,7 +10,7 @@ interface SettingsContextType {
 }
 
 const defaultRateSettings: RateSettings = {
-  ratePerUnit: 1.5, // Default rate per cubic meter or unit
+  ratePerUnit: 100.00, // Default rate per cubic meter or unit in Rupees
   taxPercentage: 5, // Default tax percentage
   discountPercentage: 0, // Default discount percentage
 };
@@ -26,15 +26,22 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
     const storedSettings = localStorage.getItem("aquaBillRateSettings");
     if (storedSettings) {
       try {
-        setRateSettingsState(JSON.parse(storedSettings));
+        const parsedSettings = JSON.parse(storedSettings);
+        // Ensure the rate is appropriate for Rupees if migrating from a $ based value
+        if (parsedSettings.ratePerUnit < 10) { // Heuristic: if rate is very low, it might be old $ value
+            parsedSettings.ratePerUnit = defaultRateSettings.ratePerUnit; // Reset to default Rupee rate
+        }
+        setRateSettingsState(parsedSettings);
       } catch (error) {
         console.error("Failed to parse rate settings from localStorage", error);
         // Fallback to default if parsing fails
         localStorage.setItem("aquaBillRateSettings", JSON.stringify(defaultRateSettings));
+        setRateSettingsState(defaultRateSettings);
       }
     } else {
       // Initialize localStorage with default settings if not present
        localStorage.setItem("aquaBillRateSettings", JSON.stringify(defaultRateSettings));
+       setRateSettingsState(defaultRateSettings);
     }
     setIsSettingsLoaded(true);
   }, []);

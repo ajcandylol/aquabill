@@ -16,11 +16,11 @@ import { Button } from "@/components/ui/button";
 
 // Mock data for demonstration
 const mockHistory: BillEntry[] = [
-  { id: "1", date: "2023-12-15", period: "November 2023", consumption: 120, amount: 195.30 },
-  { id: "2", date: "2024-01-15", period: "December 2023", consumption: 135, amount: 219.19 },
-  { id: "3", date: "2024-02-15", period: "January 2024", consumption: 110, amount: 179.03 },
-  { id: "4", date: "2024-03-15", period: "February 2024", consumption: 140, amount: 227.50 },
-  { id: "5", date: "2024-04-15", period: "March 2024", consumption: 125, amount: 203.44 },
+  { id: "1", date: "2023-12-15", period: "November 2023", consumption: 120, amount: 19530.00 },
+  { id: "2", date: "2024-01-15", period: "December 2023", consumption: 135, amount: 21919.00 },
+  { id: "3", date: "2024-02-15", period: "January 2024", consumption: 110, amount: 17903.00 },
+  { id: "4", date: "2024-03-15", period: "February 2024", consumption: 140, amount: 22750.00 },
+  { id: "5", date: "2024-04-15", period: "March 2024", consumption: 125, amount: 20344.00 },
 ];
 
 
@@ -62,7 +62,7 @@ export function BillingHistoryTable() {
                 <TableCell className="font-medium">{bill.period}</TableCell>
                 <TableCell>{bill.date}</TableCell>
                 <TableCell className="text-right">{bill.consumption.toLocaleString()}</TableCell>
-                <TableCell className="text-right">${bill.amount.toFixed(2)}</TableCell>
+                <TableCell className="text-right">₹{bill.amount.toFixed(2)}</TableCell>
                 <TableCell className="text-center">
                   <Button variant="outline" size="sm">View Details</Button>
                 </TableCell>

@@ -93,9 +93,9 @@ export function RateSettingsForm() {
               name="ratePerUnit"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Rate per Unit ($)</FormLabel>
+                  <FormLabel>Rate per Unit (₹)</FormLabel>
                   <FormControl>
-                    <Input type="number" step="0.01" placeholder="e.g., 1.50" {...field} />
+                    <Input type="number" step="0.01" placeholder="e.g., 100.00" {...field} />
                   </FormControl>
                   <FormDescription>The cost for each unit of water consumed.</FormDescription>
                   <FormMessage />
